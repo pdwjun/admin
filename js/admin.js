@@ -29,5 +29,4 @@ $(document).ready(function()
 });
 
 var test = function(){
-    alert('test')
 }
