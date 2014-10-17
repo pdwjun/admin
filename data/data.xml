@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <roles>
+        <role >管理员</role>
+        <role >操作员</role>
+        <role >普通员工</role>
+    </roles>
+    <users>
+        <user pwd="111" role="管理员">admin</user>
+        <user pwd="111" role="操作员">user</user>
+        <user pwd="111" role="普通员工">guest</user>
+    </users>
+</data>
