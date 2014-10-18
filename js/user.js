@@ -41,13 +41,6 @@ var save = function(){
     $("#data tr").each(function(){
         data.push( Array($(this).find("#pwd").val(),$(this).find("#name").val(),$(this).find("select option:selected").text()));
     })
-    var json = "{'data':["
-    $.each(data,function(){
-        json += "{'pwd':"+$(this).find("#pwd").val()+'}'
-        json += "{'role':"+$(this).find("select option:selected").text()+'}'
-        json += "{'name':"+$(this).find("#name").val()+'}'
-    })
-    json += "]}"
     $.ajax({
         url:'xml.php',
         type:"post",

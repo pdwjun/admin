@@ -13,7 +13,7 @@ $(document).ready(function()
 
             var table = "<tr><td>"+ role + "</td></tr>"
 
-            $('#data').append($(table));
+            $('#data').append(table);
 
         });
     });

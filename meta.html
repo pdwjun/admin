@@ -4,27 +4,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/admin.css"/>
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/user.js"></script>
-    <title>会员管理</title>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/meta.js"></script>
+    <title>标签管理</title>
 </head>
 <body>
 <div class="container">
     <div class="row show-grid">
-        <div class="col-md-3"><a href="meta.html" >首页</a></div>
+        <div class="col-md-3"><a href="index.html" >首页</a></div>
         <div class="col-md-3"><a href="user.html" >会员管理</a> </div>
         <div class="col-md-3"><a href="role.html" >角色管理</a> </div>
         <div class="col-md-3"><a href="meta.html" >新建页面</a></div>
     </div>
     <table class="table table-striped" id="data">
-        <th>密码</th>
-        <th>用户名</th>
-        <th>角色</th>
+        <th>标签</th>
+        <th>标签名称</th>
+        <th>宽度</th>
+        <th>标签类型</th>
+        <th>时间类型</th>
         <th>操作</th>
-
     </table>
     <button type="button" class="btn btn-primary" onclick="save()">保存</button>
     <button type="button" class="btn btn-primary" onclick="addrow()">添加会员</button>
+    <select name="test" id="test">
+        <option value="1">11</option>
+        <option value="2">3</option>
+    </select>
 </div>
 </body>
 </html>
