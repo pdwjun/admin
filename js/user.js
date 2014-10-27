@@ -42,7 +42,7 @@ var save = function(){
         data.push( Array($(this).find("#pwd").val(),$(this).find("#name").val(),$(this).find("select option:selected").text()));
     })
     $.ajax({
-        url:'xml.php',
+        url:'user.php',
         type:"post",
         data: {'data': data},
         success:function(d){

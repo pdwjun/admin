@@ -17,20 +17,24 @@ $(document).ready(function() {
         $.get('data/meta.xml', function (e) {
 
 
-
+            var tab_count = 0
             $(e).find('meta').each(function () {
                 var $item = $(this)
 
+                var id = $item.attr("id")
                 var name = $item.attr("name")
                 var width = $item.attr("width")
                 var option = $item.attr("option")
                 var type = $item.attr("type")
 
-                tab.push(Array(name,width,option,type))
+                tab.push(Array(name,width,option,type,id))
                 th += '<th width="' + width + 'px">' + name + '</th>'
+                tab_count++
             })
             th += "<th>操作</th></tr>"
             html += th
+
+            $("#tab_count").val(tab_count)
 
             var step = 0
             $(d).find('item').each(function () {
@@ -77,13 +81,22 @@ $(document).ready(function() {
 var save = function(){
     var data = []
     $("#data tr").each(function(){
-        data.push( Array($(this).find("#name").val(),$(this).find("#width").val(),$(this).find("#option option:selected").text(),$(this).find("#type option:selected").text()));
+        var tab_count = $("#tab_count").val()
+        var arr = []
+        for(i=0;i<tab_count;i++){
+            if($(this).find("#tab_"+i+"[name='checkbox']").length>0)
+                arr.push($(this).find("#tab_"+i).is(":checked"))
+            else
+                arr.push($(this).find("#tab_"+i).val())
+        }
+        data.push(arr);
     })
     $.ajax({
-        url:'meta.php',
+        url:'page.php',
         type:"post",
         data: {'data': data},
         success:function(d){
+            //$("body").html(d)
             alert(d)
         }})
 
@@ -130,8 +143,9 @@ var addRow = function(obj){
             var width = $item.attr("width")
             var option = $item.attr("option")
             var type = $item.attr("type")
+            var id = $item.attr("id")
 
-            tab.push(Array(name,width,option,type))
+            tab.push(Array(name,width,option,type,id))
         })
         var j = 0
 
@@ -149,10 +163,10 @@ var addRow = function(obj){
                     td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="" />'
                     break;
                 case '选择框':
-                    td = '<input type="checkbox" name="checkbox" id="checkbox" />'
+                    td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
                     break;
                 case '员工':
-                    var select = "<select name='user'>"
+                    var select = "<select name='user' id='tab_'"+j+">"
 
                     $.each(users,function(key,value){
                         select += "<option value='"+value+"'>"+value+"</option>"
@@ -208,10 +222,10 @@ var addlist = function (obj, step) {
                     td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="" />'
                     break;
                 case '选择框':
-                    td = '<input type="checkbox" name="checkbox" id="checkbox" />'
+                    td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
                     break;
                 case '员工':
-                    var select = "<select name='user'>"
+                    var select = "<select name='user' id='tab_'"+j+">"
 
                     $.each(users,function(key,value){
                         select += "<option value='"+value+"'>"+value+"</option>"
@@ -248,23 +262,23 @@ var getTD = function(tab,$list, users,j){
 
     switch (tab[j][2]){
         case '文本':
-            td = '<input type="text" id="tab_'+j+'" value="'+$list.attr(tab[j][0])+'" />'
+            td = '<input type="text" id="tab_'+j+'" value="'+$list.attr('p'+tab[j][4])+'" />'
             break;
         case '时间':
-            td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr(tab[j][0])+'" />'
+            td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
             break;
         case '时间-自动':
-            td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr(tab[j][0])+'" />'
+            td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
             break;
         case '选择框':
             var checked = ""
-            if($list.attr(tab[j][0])==1)
+            if($list.attr('p'+tab[j][4])=="true")
                 checked = "checked='checked'"
-            td = '<input type="checkbox" name="checkbox" id="checkbox" '+checked+' />'
+            td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" '+checked+' />'
             break;
         case '员工':
-            var select = "<select name='user'>"
-            var user = $list.attr(tab[j][0])
+            var select = "<select name='user' id='tab_"+j+"'>"
+            var user = $list.attr('p'+tab[j][4])
 
             $.each(users,function(key,value){
                 select += "<option value='"+value+"'"

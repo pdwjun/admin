@@ -21,53 +21,57 @@ $(document).ready(function()
     })
         $.get('data/meta.xml', function(d){
 
-        var data = []
-        var html = ""
-        var items = Array('时间','时间-自动','文本','选择框','员工')
-        var first = 1
-        $(d).find('meta').each(function() {
-            var meta = $(this)
-            var select = "<select id='option'>"
-            var option =  meta.attr('option')
-            var type = meta.attr('type')
+            var data = []
+            var html = ""
+            var items = Array('时间','时间-自动','文本','选择框','员工')
+            var first = 1
+            var count = 0
+            $(d).find('meta').each(function() {
+                var meta = $(this)
+                var select = "<select id='option'>"
+                var option =  meta.attr('option')
+                var type = meta.attr('type')
 
-            $.each(items,function(key,value){
-                select += "<option value='"+value+"'"
-                if(option==value)
-                    select += " selected='true' "
-                select += ">"+value+"</option>"
-            })
-            select += "</select>"
-            var typeOption = ""
-            if(option=="时间"||option=="时间-自动") {
-                typeOption = "<select id='type'>"
-                $.each(types, function (key, value) {
-                    typeOption += "<option value='" + value + "'"
-                    if (type == value)
-                        typeOption += " selected='true' "
-                    typeOption += ">" + value + "</option>"
+                $.each(items,function(key,value){
+                    select += "<option value='"+value+"'"
+                    if(option==value)
+                        select += " selected='true' "
+                    select += ">"+value+"</option>"
                 })
-                typeOption += "</select>"
-            }
-            if(first==1)
-            {
-                var main = '主标签'
-                first++
-            }
-            else
-                var main = '标签'+ first++
-            html += "<tr><td>"+main+"</td><td>名称:<input type='text' id='name' value='"+meta.attr('name')+"'/></td>" +
-                "<td><input type='number' id='width' value='"+meta.attr('width')+"'/>px</td>" +
-                "<td>"+select+"</td><td>"+typeOption+"</td><td><a href='#' onclick='rmRow(this)' >删除</a> </td></tr>"
-        })
-        $('#data').append(html);
+                select += "</select>"
+                var typeOption = ""
+                if(option=="时间"||option=="时间-自动") {
+                    typeOption = "<select id='type'>"
+                    $.each(types, function (key, value) {
+                        typeOption += "<option value='" + value + "'"
+                        if (type == value)
+                            typeOption += " selected='true' "
+                        typeOption += ">" + value + "</option>"
+                    })
+                    typeOption += "</select>"
+                }
+                if(first==1)
+                {
+                    var main = '主标签'
+                    first++
+                }
+                else
+                    var main = '标签'+ first++
+                html += "<tr><td>"+main+"</td><td>名称:<input type='text' id='name' value='"+meta.attr('name')+"'/></td>" +
+                    "<td><input type='number' id='width' value='"+meta.attr('width')+"'/>px</td>" +
+                    "<td>"+select+"</td><td>"+typeOption+"</td><td><a href='#' onclick='rmRow(this)' >删除</a>" +
+                "<input id='id' type='hidden' value='"+meta.attr('id')+"' /> </td></tr>"
+                count = parseInt(meta.attr('id')) + 1
+            })
+            $('#data').append(html);
+            $("#count").val(count)
     });
 });
 
 var save = function(){
     var data = []
     $("#data tr").each(function(){
-        data.push( Array($(this).find("#name").val(),$(this).find("#width").val(),$(this).find("#option option:selected").text(),$(this).find("#type option:selected").text()));
+        data.push( Array($(this).find("#name").val(),$(this).find("#width").val(),$(this).find("#option option:selected").text(),$(this).find("#type option:selected").text(),$(this).find("#id").val()));
     })
     $.ajax({
         url:'meta.php',
@@ -101,9 +105,12 @@ var addrow = function(){
             typeOption += ">"+value+"</option>"
         })
         typeOption += "</select>"
+        var count = $("#count").val()
         $("#data tr:last").after("<tr><td>新标签</td><td>名称:<input type='text' id='name' value='标签名称'/></td>" +
             "<td><input type='number' id='width' value=''/>px</td>" +
-            "<td>"+select+"</td><td>"+typeOption+"</td><td><a href='#' onclick='rmRow(this)' >删除</a> </td></tr>")
+            "<td>"+select+"</td><td>"+typeOption+"</td><td><a href='#' onclick='rmRow(this)' >删除</a>" +
+        "<input id='id' type='hidden' value='"+count+"' /> </td></tr>")
+        $("#count").val(parseInt(count)+1)
 
     })
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
     <metas>
-        <meta name="时间" width="" option="时间" type="12月31日" ></meta>
-        <meta name="编号" width="" option="文本"></meta>
-        <meta name="内容" width="" option="文本"></meta>
-        <meta name="选择" width="" option="选择框"></meta>
-        <meta name="处理人" width="" option="员工"></meta>
-        <meta name="开始时间" width="" option="时间"></meta>
-        <meta name="结束时间" width="" option="时间"></meta>
+        <meta id="1" name="时间" width="" option="时间" type="12月31日" ></meta>
+        <meta id="2" name="编号" width="" option="文本"></meta>
+        <meta id="3" name="内容" width="" option="文本"></meta>
+        <meta id="4" name="选择" width="" option="选择框"></meta>
+        <meta id="5" name="处理人" width="" option="员工"></meta>
+        <meta id="6" name="开始时间" width="" option="时间"></meta>
+        <meta id="7" name="结束时间" width="" option="时间"></meta>
     </metas>
 </data>

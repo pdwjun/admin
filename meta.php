@@ -22,6 +22,7 @@ foreach($data as $key => $item){
     if($key != 0)
     {
         $newrole = $dom->createElement("meta");
+        $newrole->setAttribute('id', $item[4]);
         $newrole->setAttribute('name', $item[0]);
         $newrole->setAttribute('width', $item[1]);
         $newrole->setAttribute('option', $item[2]);
