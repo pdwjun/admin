@@ -3,10 +3,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
+    <link type="text/css" rel="stylesheet" href="js/jquery-te-1.4.0.css">
+    <link rel="stylesheet" type="text/css" href="css/wysiwyg-color.css"/>
+    <!--<link rel="stylesheet" href="css/jquery-ui.min.css"/>-->
     <link rel="stylesheet" href="css/admin.css"/>
     <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/meta.js"></script>
-    <title>标签管理</title>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <!--<script src="js/jquery-ui.min.js"></script>-->
+    <script src="js/edit.js"></script>
+    <script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+    <title>首页</title>
 </head>
 <body>
 <div class="container">
@@ -16,17 +23,14 @@
         <div class="col-md-3"><a href="edit.html" >页面管理</a> </div>
         <div class="col-md-3"><a href="meta.html" >新建页面</a></div>
     </div>
-    <input type="hidden" id="count" />
     <table class="table table-striped" id="data">
-        <th>标签</th>
-        <th>标签名称</th>
-        <th>宽度</th>
-        <th>标签类型</th>
-        <th>时间格式</th>
-        <th>操作</th>
+
     </table>
+
     <button type="button" class="btn btn-primary" onclick="save()">保存</button>
-    <button type="button" class="btn btn-primary" onclick="addrow()">添加标签</button>
+    <button type="button" class="btn btn-primary" onclick="addRow()">添加</button>
+    <input type="hidden" id="account" />
+    <input type="hidden" id="tab_count" />
 </div>
 </body>
 </html>

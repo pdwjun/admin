@@ -31,7 +31,7 @@ $(document).ready(function() {
                 th += '<th width="' + width + 'px">' + name + '</th>'
                 tab_count++
             })
-            th += "</tr>"
+            th += "<th>操作</th></tr>"
             html += th
 
             $("#tab_count").val(tab_count)
@@ -44,7 +44,7 @@ $(document).ready(function() {
                 var item_count = 0
                 $item.find('list').each(function(){item_count++})
                 var td = getTD(tab,$item,users,0)
-                tr += '<tr class="main'+step+'"><td rowspan="'+item_count+'">'+td+'</td>'
+                tr += '<tr class="main'+step+'"><td rowspan="'+item_count+'">'+td+'<br /><a href="#" onclick="rmRow(this)" >删除</a></td>'
                 first ++
                 $item.find('list').each(function(){
                     var $list = $(this)
@@ -61,7 +61,7 @@ $(document).ready(function() {
                         }
                         j++
                     })
-                    tr += "</tr>"
+                    tr += "<td><a href='#' onclick='addlist(this,"+step+")'>添加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+step+")'>删除</a></td></tr>"
                 })
                 step++
             })
@@ -282,7 +282,7 @@ var getTD = function(tab,$list, users,j){
                     value = d;
                     //alert(d)
                 }})
-            td = value
+            td = '<textarea class="jqte-test" id="tab_'+j+'" >'+value+'</textarea>'
             break;
         case '时间':
             td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'

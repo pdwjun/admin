@@ -7,9 +7,16 @@
  */
 
 include 'save.php';
+$del = 'delete from page ';
+mysql_select_db('page', $con);
+mysql_query($del);
+mysql_query('default-character-set=utf8');
 $dom=new DOMDocument('1.0');
+$meta=new DOMDocument('1.0');
 $dom->load('data/page.xml');
+$meta->load('data/meta.xml');
 $roles=$dom->documentElement;
+$metas=$meta->documentElement;
 $a = $dom->getElementsByTagName('items')->item(0);
 $a->parentNode->removeChild($a);
 
@@ -17,8 +24,8 @@ $new = $dom->createElement("items");
 $x = $dom->getElementsByTagName("data")->item(0);
 $x->appendChild($new);
 
-$echo = "d";
 $data = $_POST['data'];
+$page_id = 1;
 foreach($data as $key => $item){
     if($key != 0)
     {
@@ -30,43 +37,39 @@ foreach($data as $key => $item){
 
             $child = $dom->createElement("list");
             for($i=1;$i<$count;$i++){
-                $child->setAttribute('p'.($i+1), $item[$i]);
+                $m = $metas->getElementsByTagName('meta')->item($i);
+                if( $m->getAttribute("option")=='文本'){
+                    $sql = "insert into page values($page_id,'".$item[$i]."')";
+                    $result = mysql_query($sql);
+                    $child->setAttribute('p'.($i+1), $page_id++);
+//                    $child->setAttribute('p'.($i+1), $item[$i]);
+                    $page_id++;
+                }
+                else
+                    $child->setAttribute('p'.($i+1), $item[$i]);
             }
             $newrole->appendChild($child);
             $new->appendChild($newrole);
             $parrole = $newrole;
         }
         else{
-            $newrole = $dom->createElement("list");
+            $child = $dom->createElement("list");
             for($i=1;$i<$count;$i++){
-                $newrole->setAttribute('p'.($i+1), $item[$i]);
-                echo $i;
+                $m = $metas->getElementsByTagName('meta')->item($i);
+                if( $m->getAttribute("option")=='文本'){
+                    $sql = "insert into page values($page_id,'".$item[$i]."')";
+                    $result = mysql_query($sql);
+                    $child->setAttribute('p'.($i+1), $page_id++);
+//                    $child->setAttribute('p'.($i+1), $item[$i]);
+                    $page_id++;
+                }
+                else
+                    $child->setAttribute('p'.($i+1), $item[$i]);
             }
-            $parrole->appendChild($newrole);
+            $parrole->appendChild($child);
         }
-        save();
     }
 }
 $dom->save('data/page.xml');
 //echo $_POST['pwd'];
 echo '操作成功';
-
-function save(){
-
-    $con = mysql_connect("localhost","jason","lrc207107");
-    if (!$con)
-    {
-        die('Could not connect: ' . mysql_error());
-    }
-    mysql_select_db('page', $con);
-    $sql = 'select * from page';
-    $result = mysql_query($sql);
-    while($row = mysql_fetch_array($result))
-    {
-        echo $row['id'] . " " . $row['content'];
-        echo "<br />";
-    }
-// some code
-
-//mysql_close($con);
-}
