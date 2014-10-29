@@ -1,8 +1,20 @@
-/**
+﻿/**
  * Created by - on 16/10/2014.
  */
 $.ajaxSetup({
     async : false //取消异步
+});
+$(function () {
+    $('body').on('click', function (e) {
+        $.ajax({
+            url: 'access.php',
+            success: function (d) {
+                if(d!=''){
+                    save()
+                }
+            }
+        })
+    });
 });
 $(document).ready(function()
 {
@@ -104,7 +116,7 @@ var save = function(){
         type:"post",
         data: {'data': data},
         success:function(d){
-            alert(d)
+            //alert(d)
         }})
 
 }
@@ -113,7 +125,7 @@ var rmRow = function(obj){
     obj.parentElement.parentElement.remove();
 }
 
-var addrow = function(){
+var addRow = function(){
     $.get('data/meta.xml', function(d) {
         var items = Array('时间','时间-自动','文本','选择框','员工')
         var select = "<select name='option'>"

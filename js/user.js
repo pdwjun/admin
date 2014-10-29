@@ -4,6 +4,18 @@
 $.ajaxSetup({
     async : false //取消异步
 });
+$(function () {
+    $('body').on('click', function (e) {
+        $.ajax({
+            url: 'access.php',
+            success: function (d) {
+                if(d!=''){
+                    save()
+                }
+            }
+        })
+    });
+});
 $(document).ready(function()
 {
     var go = false
@@ -72,7 +84,7 @@ var save = function(){
         type:"post",
         data: {'data': data},
         success:function(d){
-        alert(d)
+        //alert(d)
     }})
 
 }

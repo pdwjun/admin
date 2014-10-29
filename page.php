@@ -6,11 +6,11 @@
  * Time: 10:14
  */
 
-include 'save.php';
-$del = 'delete from page ';
-mysql_select_db('page', $con);
-mysql_query($del);
-mysql_query('default-character-set=utf8');
+//include 'save.php';
+//$del = 'delete from page ';
+//mysql_select_db('page', $con);
+//mysql_query($del);
+//mysql_query('default-character-set=utf8');
 $dom=new DOMDocument('1.0');
 $meta=new DOMDocument('1.0');
 $dom->load('data/page.xml');

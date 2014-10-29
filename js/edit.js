@@ -200,13 +200,16 @@ var addRow = function(obj){
             var td = ""
             switch (tab[j][2]){
                 case '文本':
-                    td = '<input type="text" class="jqte-test" id="tab_'+j+'" value="" />'
+                    td = '<textarea class="textarea" id="tab_'+j+'" ></textarea>'
                     break;
                 case '时间':
-                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
+                    var myDate = new Date()
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+myDate.getFullYear()+'-'+(parseInt(myDate.getMonth())+1)+'-'+myDate.getDate()+' '+myDate.getHours()+':'+myDate.getMinutes()+'" />'
+                    break;
                     break;
                 case '时间-自动':
-                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
+                    var myDate = new Date()
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+myDate.getFullYear()+'-'+(parseInt(myDate.getMonth())+1)+'-'+myDate.getDate()+' '+myDate.getHours()+':'+myDate.getMinutes()+'" />'
                     break;
                 case '选择框':
                     td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
@@ -233,7 +236,7 @@ var addRow = function(obj){
 
         })
         tr += "<td><a href='#' onclick='addlist(this,"+main+")'>加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+main+")'>减</a></td></tr>"
-        $("#data tr:last").after(tr);
+        $("#data tr:first").after(tr);
         $("#account").val(++main)
     })
     $(".form_datetime").datetimepicker();
@@ -264,13 +267,16 @@ var addlist = function (obj, step) {
             var td = ""
             switch (tab[j][2]){
                 case '文本':
-                    td = '<input type="text" class="jqte-test" id="tab_'+j+'" value="" />'
+                    td = '<textarea class="textarea" id="tab_'+j+'" ></textarea>'
                     break;
                 case '时间':
-                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
+                    var myDate = new Date()
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+myDate.getFullYear()+'-'+(parseInt(myDate.getMonth())+1)+'-'+myDate.getDate()+' '+myDate.getHours()+':'+myDate.getMinutes()+'" />'
+                    break;
                     break;
                 case '时间-自动':
-                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
+                    var myDate = new Date()
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+myDate.getFullYear()+'-'+(parseInt(myDate.getMonth())+1)+'-'+myDate.getDate()+' '+myDate.getHours()+':'+myDate.getMinutes()+'" />'
                     break;
                 case '选择框':
                     td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
@@ -330,7 +336,7 @@ var getTD = function(tab,$list, users,j){
             //        //alert(d)
             //    }})
             //td = '<input type="text" id="tab_'+j+'" value="'+value+'" />'
-            td = '<input type="text" id="tab_'+j+'" value="'+$list.attr('p'+tab[j][4])+'" />'
+            td = '<textarea class="textarea" id="tab_'+j+'" >'+$list.attr('p'+tab[j][4])+'</textarea>'
             break;
         case '时间':
             td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
