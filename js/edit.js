@@ -82,6 +82,7 @@ $(document).ready(function() {
                             tr += '<tr class="normal">'
                         if(j>0)
                         {
+                            first ++
                             var td = ""
                             td = getTD(tab,$list,users,j)
                             tr += '<td>'+td+'</td>'
@@ -211,7 +212,7 @@ var addRow = function(obj){
                     td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
                     break;
                 case '员工':
-                    var select = "<select name='user' id='tab_'"+j+">"
+                    var select = "<select name='user' id='tab_"+j+"'>"
 
                     $.each(users,function(key,value){
                         select += "<option value='"+value+"'"
@@ -225,7 +226,7 @@ var addRow = function(obj){
                     break;
             }
             if(j==0)
-                tr += '<td rowspan="1">'+td+'</td>'
+                tr += '<td rowspan="1">'+td+'<br /><a href="#" onclick="rmRow(this)" >删除</a></td>'
             else
             tr += '<td>'+td+'</td>'
             j++
