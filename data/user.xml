@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <users>
     <user pwd="admin" role="管理员">admin</user>
-    <user pwd="action" role="操作员">user</user>
-    <user pwd="guest" role="普通员工">guest</user>
+    <user pwd="admin" role="操作员">user</user>
+    <user pwd="admin" role="普通员工">guest</user>
 </users>

@@ -6,4 +6,4 @@
         <role>普通员工</role>
     </roles>
     
-<users><user pwd="2" role="操作员">2</user><user pwd="3" role="普通员工">3</user><user pwd="4" role="普通员工">4</user><user pwd="5" role="普通员工">xxx</user></users></data>
+<users><user pwd="2" role="管理员">2</user><user pwd="3" role="普通员工">3</user><user pwd="4" role="普通员工">4</user><user pwd="5" role="普通员工">xxx</user></users></data>

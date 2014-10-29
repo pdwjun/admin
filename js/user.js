@@ -34,6 +34,17 @@ $(document).ready(function()
 
         });
     });
+    $.ajax({
+        url: 'access.php',
+        success: function (d) {
+            if(d!=''){
+                var html = '    <button type="button" class="btn btn-primary" onclick="save()">保存</button>'
+                    +' <button type="button" class="btn btn-primary" onclick="addrow()">添加会员</button>'
+                $("#button").html(html)
+
+            }
+        }
+    })
 });
 
 var save = function(){

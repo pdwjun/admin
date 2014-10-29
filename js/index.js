@@ -1,6 +1,9 @@
 /**
  * Created by - on 16/10/2014.
  */
+$.ajaxSetup({
+    async : false //取消异步
+});
 $(document).ready(function() {
     $.get('data/page.xml', function (d) {
         var account = 0
@@ -69,7 +72,6 @@ $(document).ready(function() {
         })
 
 
-        setTimeout(function () {
             $('#data').append(html)
             $(".form_datetime").datetimepicker();
             $("#account").val(account)
@@ -82,7 +84,6 @@ $(document).ready(function() {
                 jqteStatus = jqteStatus ? false : true;
                 $('.jqte-test').jqte({"status" : jqteStatus})
             });
-        }, 200);
 
     })
 })

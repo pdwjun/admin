@@ -65,6 +65,17 @@ $(document).ready(function()
             })
             $('#data').append(html);
             $("#count").val(count)
+            $.ajax({
+                url: 'access.php',
+                success: function (d) {
+                    if(d!=''){
+                        var html = '<button type="button" class="btn btn-primary" onclick="save()">保存</button>'
+                            +'<button type="button" class="btn btn-primary" onclick="addRow()">添加</button>'
+                        $("#button").html(html)
+
+                    }
+                }
+            })
     });
 });
 

@@ -1,6 +1,9 @@
 /**
  * Created by - on 16/10/2014.
  */
+$.ajaxSetup({
+    async : false //取消异步
+});
 $(document).ready(function() {
     $.get('data/page.xml', function (d) {
         var account = 0
@@ -69,20 +72,29 @@ $(document).ready(function() {
         })
 
 
-        setTimeout(function () {
-            $('#data').append(html)
-            $(".form_datetime").datetimepicker();
-            $("#account").val(account)
-            $('.jqte-test').jqte();
+        $('#data').append(html)
+        $(".form_datetime").datetimepicker();
+        $("#account").val(account)
+        $('.jqte-test').jqte();
 
-            // settings of status
-            var jqteStatus = true;
-            $(".status").click(function()
-            {
-                jqteStatus = jqteStatus ? false : true;
-                $('.jqte-test').jqte({"status" : jqteStatus})
-            });
-        }, 200);
+        // settings of status
+        var jqteStatus = true;
+        $(".status").click(function()
+        {
+            jqteStatus = jqteStatus ? false : true;
+            $('.jqte-test').jqte({"status" : jqteStatus})
+        });
+        $.ajax({
+            url: 'access.php',
+            success: function (d) {
+                if(d!=''){
+                    var html = '<button type="button" class="btn btn-primary" onclick="save()">保存</button>'
+                    +'<button type="button" class="btn btn-primary" onclick="addRow()">添加</button>'
+                    $("#button").html(html)
+
+                }
+            }
+        })
 
     })
 })
