@@ -1,8 +1,23 @@
 /**
  * Created by - on 16/10/2014.
  */
+$.ajaxSetup({
+    async : false //取消异步
+});
 $(document).ready(function()
 {
+    var go = false
+    $.ajax({
+        url: 'checklogin.php',
+        success: function (d) {
+            if(d==''){
+                location.href ='./'
+            }else
+                go = true
+        }
+    })
+    if(go == false)
+        return true
     $.get('data/data.xml', function(d){
 
         var roles = []

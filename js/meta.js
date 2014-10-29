@@ -1,8 +1,23 @@
 /**
  * Created by - on 16/10/2014.
  */
+$.ajaxSetup({
+    async : false //取消异步
+});
 $(document).ready(function()
 {
+    var go = false
+    $.ajax({
+        url: 'checklogin.php',
+        success: function (d) {
+            if(d==''){
+                location.href ='./'
+            }else
+                go = true
+        }
+    })
+    if(go == false)
+        return true
     var types = Array('2014年12月31日', '12月31日','2014.12.31','12.31','2014年12月31日59:59')
     $("div").delegate("select[id='option']","change",function(){
         if($(this).val()=="时间"||$(this).val()=="时间-自动"){

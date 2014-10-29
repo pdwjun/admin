@@ -3,6 +3,13 @@
  */
 
 $(document).ready(function() {
-
+    $.ajax({
+        url: 'access.php',
+        success: function (d) {
+            if(d==''){
+                location.href ='./'
+            }
+        }
+    })
 
 })

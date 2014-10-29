@@ -17,6 +17,19 @@ $(function () {
     });
 });
 $(document).ready(function() {
+    var go = false
+    $.ajax({
+        url: 'checklogin.php',
+        success: function (d) {
+            if(d==''){
+                location.href ='./'
+            }else
+            go = true
+            $("#userid").val(d)
+        }
+    })
+    if(go == false)
+    return true
     $.get('data/page.xml', function (d) {
         var account = 0
         var html = ""
@@ -201,7 +214,11 @@ var addRow = function(obj){
                     var select = "<select name='user' id='tab_'"+j+">"
 
                     $.each(users,function(key,value){
-                        select += "<option value='"+value+"'>"+value+"</option>"
+                        select += "<option value='"+value+"'"
+                        if($("#userid").val()==value)
+                            select += " selected='true' "
+                        select += ">"+value+"</option>"
+                        //select += "<option value='"+value+"'>"+value+"</option>"
                     })
                     select += "</select>"
                     td = select
@@ -261,7 +278,11 @@ var addlist = function (obj, step) {
                     var select = "<select name='user' id='tab_'"+j+">"
 
                     $.each(users,function(key,value){
-                        select += "<option value='"+value+"'>"+value+"</option>"
+                        select += "<option value='"+value+"'"
+                        if($("#userid").val()==value)
+                            select += " selected='true' "
+                        select += ">"+value+"</option>"
+                        //select += "<option value='"+value+"'>"+value+"</option>"
                     })
                     select += "</select>"
                     td = select
