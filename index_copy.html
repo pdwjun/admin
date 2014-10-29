@@ -4,16 +4,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css"/>
+    <link type="text/css" rel="stylesheet" href="js/jquery-te-1.4.0.css">
+    <link rel="stylesheet" type="text/css" href="css/wysiwyg-color.css"/>
     <!--<link rel="stylesheet" href="css/jquery-ui.min.css"/>-->
     <link rel="stylesheet" href="css/admin.css"/>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap-datetimepicker.min.js"></script>
     <!--<script src="js/jquery-ui.min.js"></script>-->
-    <script>
-        $(function(){ $("body div div").load("header.html") });
-    </script>
-    <script src="js/edit.js"></script>
+    <script src="js/index.js"></script>
+    <script type="text/javascript" src="js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
     <title>首页</title>
+    <script>
+        $(function(){ $("body div .show-grid").load("header.html") });
+    </script>
 </head>
 <body>
 <div class="container">
@@ -22,9 +25,6 @@
     <table class="table table-striped" id="data">
 
     </table>
-    <span id="button">
-
-    </span>
 
     <input type="hidden" id="account" />
     <input type="hidden" id="tab_count" />

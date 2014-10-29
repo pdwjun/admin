@@ -4,6 +4,18 @@
 $.ajaxSetup({
     async : false //取消异步
 });
+$(function () {
+    $('body').on('click', function (e) {
+        $.ajax({
+            url: 'access.php',
+            success: function (d) {
+                if(d!=''){
+                    save()
+                }
+            }
+        })
+    });
+});
 $(document).ready(function() {
     $.get('data/page.xml', function (d) {
         var account = 0
@@ -64,7 +76,7 @@ $(document).ready(function() {
                         }
                         j++
                     })
-                    tr += "<td><a href='#' onclick='addlist(this,"+step+")'>添加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+step+")'>删除</a></td></tr>"
+                    tr += "<td><a href='#' onclick='addlist(this,"+step+")'>加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+step+")'>减</a></td></tr>"
                 })
                 step++
             })
@@ -75,7 +87,7 @@ $(document).ready(function() {
         $('#data').append(html)
         $(".form_datetime").datetimepicker();
         $("#account").val(account)
-        $('.jqte-test').jqte();
+        //$('.jqte-test').jqte();
 
         // settings of status
         var jqteStatus = true;
@@ -88,8 +100,7 @@ $(document).ready(function() {
             url: 'access.php',
             success: function (d) {
                 if(d!=''){
-                    var html = '<button type="button" class="btn btn-primary" onclick="save()">保存</button>'
-                    +'<button type="button" class="btn btn-primary" onclick="addRow()">添加</button>'
+                    var html = '<button type="button" class="btn btn-primary" onclick="addRow()">添加</button>'
                     $("#button").html(html)
 
                 }
@@ -118,7 +129,7 @@ var save = function(){
         data: {'data': data},
         success:function(d){
             //$("body").html(d)
-            alert(d)
+            //alert(d)
         }})
 
 }
@@ -178,10 +189,10 @@ var addRow = function(obj){
                     td = '<input type="text" class="jqte-test" id="tab_'+j+'" value="" />'
                     break;
                 case '时间':
-                    td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="" />'
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
                     break;
                 case '时间-自动':
-                    td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="" />'
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
                     break;
                 case '选择框':
                     td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
@@ -203,10 +214,11 @@ var addRow = function(obj){
             j++
 
         })
-        tr += "<td><a href='#' onclick='addlist(this,"+main+")'>添加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+main+")'>删除</a></td></tr>"
+        tr += "<td><a href='#' onclick='addlist(this,"+main+")'>加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+main+")'>减</a></td></tr>"
         $("#data tr:last").after(tr);
         $("#account").val(++main)
     })
+    $(".form_datetime").datetimepicker();
 
 }
 
@@ -237,10 +249,10 @@ var addlist = function (obj, step) {
                     td = '<input type="text" class="jqte-test" id="tab_'+j+'" value="" />'
                     break;
                 case '时间':
-                    td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="" />'
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
                     break;
                 case '时间-自动':
-                    td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="" />'
+                    td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="" />'
                     break;
                 case '选择框':
                     td = '<input type="checkbox" name="checkbox" id="tab_'+j+'" />'
@@ -260,12 +272,13 @@ var addlist = function (obj, step) {
             j++
 
         })
-        tr += "<td><a href='#' onclick='addlist(this,"+step+")'>添加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+step+")'>删除</a></td></tr>"
+        tr += "<td><a href='#' onclick='addlist(this,"+step+")'>加</a>&nbsp;&nbsp;&nbsp;<a href='#' onclick='rmList(this,"+step+")'>减</a></td></tr>"
         $(obj.parentElement.parentElement).after(tr);
         var id = ".main"+step+" td"
         var count = $(id).first().attr("rowspan")
         $(".main"+step).children().first().attr("rowspan", ++count)
     })
+    $(".form_datetime").datetimepicker();
 }
 
 var userList = function(){
@@ -283,24 +296,25 @@ var getTD = function(tab,$list, users,j){
 
     switch (tab[j][2]){
         case '文本':
-            var value = ''
-            $.ajax({
-                url:'read.php',
-                type:"post",
-                async:false,//取消异步请求
-                data: {'data': $list.attr('p'+tab[j][4])},
-                success:function(d){
-                    //$("body").html(d)
-                    value = d;
-                    //alert(d)
-                }})
-            td = '<textarea class="jqte-test" id="tab_'+j+'" >'+value+'</textarea>'
+            //var value = ''
+            //$.ajax({
+            //    url:'read.php',
+            //    type:"post",
+            //    async:false,//取消异步请求
+            //    data: {'data': $list.attr('p'+tab[j][4])},
+            //    success:function(d){
+            //        //$("body").html(d)
+            //        value = d;
+            //        //alert(d)
+            //    }})
+            //td = '<input type="text" id="tab_'+j+'" value="'+value+'" />'
+            td = '<input type="text" id="tab_'+j+'" value="'+$list.attr('p'+tab[j][4])+'" />'
             break;
         case '时间':
-            td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
+            td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
             break;
         case '时间-自动':
-            td = '<input type="text" id="tab_'+j+'" readonly class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
+            td = '<input type="text" id="tab_'+j+'" class="form_datetime" value="'+$list.attr('p'+tab[j][4])+'" />'
             break;
         case '选择框':
             var checked = ""

@@ -38,14 +38,14 @@ foreach($data as $key => $item){
             $child = $dom->createElement("list");
             for($i=1;$i<$count;$i++){
                 $m = $metas->getElementsByTagName('meta')->item($i);
-                if( $m->getAttribute("option")=='文本'){
-                    $sql = "insert into page values($page_id,'".$item[$i]."')";
-                    $result = mysql_query($sql);
-                    $child->setAttribute('p'.($i+1), $page_id++);
-//                    $child->setAttribute('p'.($i+1), $item[$i]);
-                    $page_id++;
-                }
-                else
+//                if( $m->getAttribute("option")=='文本'){
+//                    $sql = "insert into page values($page_id,'".$item[$i]."')";
+//                    $result = mysql_query($sql);
+//                    $child->setAttribute('p'.($i+1), $page_id++);
+////                    $child->setAttribute('p'.($i+1), $item[$i]);
+//                    $page_id++;
+//                }
+//                else
                     $child->setAttribute('p'.($i+1), $item[$i]);
             }
             $newrole->appendChild($child);
@@ -56,14 +56,14 @@ foreach($data as $key => $item){
             $child = $dom->createElement("list");
             for($i=1;$i<$count;$i++){
                 $m = $metas->getElementsByTagName('meta')->item($i);
-                if( $m->getAttribute("option")=='文本'){
-                    $sql = "insert into page values($page_id,'".$item[$i]."')";
-                    $result = mysql_query($sql);
-                    $child->setAttribute('p'.($i+1), $page_id++);
-//                    $child->setAttribute('p'.($i+1), $item[$i]);
-                    $page_id++;
-                }
-                else
+//                if( $m->getAttribute("option")=='文本'){
+//                    $sql = "insert into page values($page_id,'".$item[$i]."')";
+//                    $result = mysql_query($sql);
+//                    $child->setAttribute('p'.($i+1), $page_id++);
+////                    $child->setAttribute('p'.($i+1), $item[$i]);
+//                    $page_id++;
+//                }
+//                else
                     $child->setAttribute('p'.($i+1), $item[$i]);
             }
             $parrole->appendChild($child);

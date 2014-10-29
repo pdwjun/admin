@@ -6,7 +6,7 @@
  * Time: 23:51
  */
 
-$con = mysql_connect("localhost","dbuser","dbuserpassword");
+$con = mysql_connect("localhost","jason","lrc207107");
 //参数1：本地数据库，参数2：连接数据库的账号，参数3：该账号的密码
 if (!$con)
 {

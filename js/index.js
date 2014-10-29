@@ -107,7 +107,7 @@ var save = function(){
         data: {'data': data},
         success:function(d){
             //$("body").html(d)
-            alert(d)
+            //alert(d)
         }})
 
 }
